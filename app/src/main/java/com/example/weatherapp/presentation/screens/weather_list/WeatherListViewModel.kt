@@ -3,7 +3,6 @@ package com.example.weatherapp.presentation.screens.weather_list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.weatherapp.domain.usecases.FetchWeathersUseCases
-import com.example.weatherapp.presentation.screens.main.MainScreenUiState
 import com.example.weatherapp.presentation.utils.mappers.toUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

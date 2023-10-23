@@ -5,15 +5,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
-import android.util.Log
 import android.widget.Toast
-import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.ActivityResultRegistryOwner
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
@@ -28,9 +27,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.weatherapp.presentation.screens.main.MainScreen
 import com.example.weatherapp.presentation.screens.main.MainViewModel
 import com.example.weatherapp.presentation.screens.weather_list.WeatherListScreen
-import java.util.UUID
-import androidx.compose.runtime.DisposableEffect
 import com.example.weatherapp.presentation.screens.weather_list.WeatherListViewModel
+import java.util.UUID
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
@@ -38,8 +36,7 @@ fun AppNavGraph() {
     val navController = rememberNavController()
 
     NavHost(
-        navController = navController,
-        startDestination = MainScreenDestination.route
+        navController = navController, startDestination = MainScreenDestination.route
     ) {
         composable(
             route = MainScreenDestination.route
@@ -50,16 +47,13 @@ fun AppNavGraph() {
             if (isPermissionsGranted(context)) {
                 viewModel.fetchCurrentWeathers()
             } else {
-                StartRequestPermission(
-                    context = context,
-                    fetchCurrentWeather = { viewModel.fetchCurrentWeathers() }
-                )
+                StartRequestPermission(context = context,
+                    fetchCurrentWeather = { viewModel.fetchCurrentWeathers() })
             }
             MainScreen(
                 navigateToWeatherList = {
                     navController.navigate(WeatherListScreenDestination.route)
-                },
-                uiStateFlow = viewModel.uiState
+                }, uiStateFlow = viewModel.uiState
             )
         }
         composable(
@@ -76,8 +70,7 @@ fun AppNavGraph() {
 @SuppressLint("UnrememberedMutableState")
 @Composable
 fun <I, O> registerForActivityResult(
-    contract: ActivityResultContract<I, O>,
-    onResult: (O) -> Unit
+    contract: ActivityResultContract<I, O>, onResult: (O) -> Unit
 ): ActivityResultLauncher<I> {
     val owner = LocalContext.current as ActivityResultRegistryOwner
     val activityResultRegistry = owner.activityResultRegistry
@@ -110,13 +103,11 @@ fun <I, O> registerForActivityResult(
 
 fun isPermissionsGranted(context: Context): Boolean {
     val isLocationPermissionGranted = ContextCompat.checkSelfPermission(
-        context,
-        Manifest.permission.ACCESS_FINE_LOCATION
+        context, Manifest.permission.ACCESS_FINE_LOCATION
     ) == PackageManager.PERMISSION_GRANTED
 
     val isCoarseLocationPermissionGranted = ContextCompat.checkSelfPermission(
-        context,
-        Manifest.permission.ACCESS_COARSE_LOCATION
+        context, Manifest.permission.ACCESS_COARSE_LOCATION
     ) == PackageManager.PERMISSION_GRANTED
 
     return isLocationPermissionGranted || isCoarseLocationPermissionGranted
@@ -125,8 +116,7 @@ fun isPermissionsGranted(context: Context): Boolean {
 
 @Composable
 fun StartRequestPermission(
-    context: Context,
-    fetchCurrentWeather: () -> Unit
+    context: Context, fetchCurrentWeather: () -> Unit
 ) {
     registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()

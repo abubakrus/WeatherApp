@@ -19,8 +19,7 @@ sealed class MainScreenUiState {
     object Loading : MainScreenUiState()
 
     data class Loaded(
-        val weather: WeatherUi,
-        val countryInfo: CountryInfo
+        val weather: WeatherUi, val countryInfo: CountryInfo
     ) : MainScreenUiState()
 
     data class Error(

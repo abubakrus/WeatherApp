@@ -10,14 +10,13 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 class ManagerModule {
     @Provides
     fun providesLocationTrackerManager(
         application: Application
-    ):LocationTrackerManager = LocationTrackerManagerImpl(
+    ): LocationTrackerManager = LocationTrackerManagerImpl(
         application = application,
         locationClient = LocationServices.getFusedLocationProviderClient(application)
     )

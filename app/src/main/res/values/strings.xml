@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Weather</string>
+    <string name="no_location">You have geolocation turned off,\n please turn it on</string>
 </resources>

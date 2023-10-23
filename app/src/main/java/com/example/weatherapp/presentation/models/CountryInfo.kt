@@ -9,8 +9,7 @@ data class CountryInfo(
 
     companion object {
         val unknown = CountryInfo(
-            cityName = "Unknown",
-            countryName = "Unknown"
+            cityName = "Unknown", countryName = "Unknown"
         )
     }
 }

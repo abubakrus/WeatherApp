@@ -40,8 +40,7 @@ import java.util.Locale
 fun DailyWeathersItemPreview() {
     MaterialTheme {
         DailyWeathersItem(
-            weather = WeatherDayInfoUi.unknown,
-            countryInfo = CountryInfo.unknown
+            weather = WeatherDayInfoUi.unknown, countryInfo = CountryInfo.unknown
         )
     }
 }
@@ -49,9 +48,7 @@ fun DailyWeathersItemPreview() {
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DailyWeathersItem(
-    weather: WeatherDayInfoUi,
-    countryInfo: CountryInfo,
-    modifier: Modifier = Modifier
+    weather: WeatherDayInfoUi, countryInfo: CountryInfo, modifier: Modifier = Modifier
 ) {
     val date = try {
         val df = DateTimeFormatter.ofPattern("dd.MM.yyyy").withLocale(Locale.ENGLISH)
@@ -91,8 +88,7 @@ fun DailyWeathersItem(
                     .padding(
                         top = 10.dp, start = 20.dp
                     )
-                    .fillMaxHeight(),
-                verticalArrangement = Arrangement.SpaceAround
+                    .fillMaxHeight(), verticalArrangement = Arrangement.SpaceAround
             ) {
                 Text(
                     text = "${weather.temperature}°",

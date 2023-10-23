@@ -1,8 +1,7 @@
 package com.example.weatherapp.domain.models
 
 data class WeatherDomain(
-    val currentWeather: WeatherDayInfoDomain,
-    val otherWeathers: List<WeatherDayInfoDomain>
+    val currentWeather: WeatherDayInfoDomain, val otherWeathers: List<WeatherDayInfoDomain>
 ) {
     fun isUnKnown() = this == unknown
 

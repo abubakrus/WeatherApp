@@ -34,7 +34,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -56,28 +58,23 @@ fun MainScreen(
 ) {
     val uiState = uiStateFlow.collectAsStateWithLifecycle().value
 
-    val fullScreenModifier = Modifier
-        .fillMaxSize()
+    val fullScreenModifier = Modifier.fillMaxSize()
 
     if (uiState is MainScreenUiState.Error) {
         ErrorMainScreen(
-            errorMessage = "",
-            modifier = fullScreenModifier
+            errorMessage = "", modifier = fullScreenModifier
         )
     }
 
     MainScreen(
-        navigateToWeatherList = navigateToWeatherList,
-        uiState = uiState
+        navigateToWeatherList = navigateToWeatherList, uiState = uiState
     )
 
 }
 
 @Composable
 private fun MainScreen(
-    navigateToWeatherList: () -> Unit,
-    uiState: MainScreenUiState,
-    modifier: Modifier = Modifier
+    navigateToWeatherList: () -> Unit, uiState: MainScreenUiState, modifier: Modifier = Modifier
 ) {
     Box(
         modifier = modifier.fillMaxSize()
@@ -98,19 +95,19 @@ private fun MainScreen(
         when (uiState) {
             is MainScreenUiState.Loading -> LoadingBlock()
             is MainScreenUiState.Loaded -> LoadedBlock(
-                currentWeather = uiState.weather.currentWeather,
-                countryInfo = uiState.countryInfo
+                currentWeather = uiState.weather.currentWeather, countryInfo = uiState.countryInfo
             )
 
-            else -> Unit
+            else -> {
+                NoOnLocation()
+            }
         }
 
         IconButton(
             onClick = navigateToWeatherList,
             modifier = Modifier
                 .padding(
-                    top = 32.dp,
-                    start = 24.dp
+                    top = 32.dp, start = 24.dp
                 )
                 .size(72.dp)
                 .align(Alignment.TopEnd),
@@ -126,9 +123,7 @@ private fun MainScreen(
 
 @Composable
 fun BoxScope.LoadedBlock(
-    currentWeather: WeatherDayInfoUi,
-    countryInfo: CountryInfo,
-    modifier: Modifier = Modifier
+    currentWeather: WeatherDayInfoUi, countryInfo: CountryInfo, modifier: Modifier = Modifier
 ) {
 
     var isShowInfoBlock by remember { mutableStateOf(false) }
@@ -139,12 +134,9 @@ fun BoxScope.LoadedBlock(
     }
 
     AnimatedVisibility(
-        modifier = Modifier.align(Alignment.TopCenter),
-        visible = isShowInfoBlock,
-        enter = fadeIn(
+        modifier = Modifier.align(Alignment.TopCenter), visible = isShowInfoBlock, enter = fadeIn(
             animationSpec = tween(durationMillis = 1000)
-        ),
-        exit = fadeOut(
+        ), exit = fadeOut(
             animationSpec = tween(durationMillis = 1000)
         )
     ) {
@@ -161,14 +153,8 @@ fun BoxScope.LoadedBlock(
     AnimatedVisibility(
         modifier = Modifier.align(Alignment.BottomCenter),
         visible = isShowInfoBlock,
-        enter = slideInVertically(
-            animationSpec = tween(1000),
-            initialOffsetY = { it / 2 }
-        ),
-        exit = slideOutVertically(
-            animationSpec = tween(1000),
-            targetOffsetY = { it / 2 }
-        )
+        enter = slideInVertically(animationSpec = tween(1000), initialOffsetY = { it / 2 }),
+        exit = slideOutVertically(animationSpec = tween(1000), targetOffsetY = { it / 2 })
 
     ) {
         HourlyWeatherItemList(
@@ -187,8 +173,7 @@ private fun BoxScope.LoadingBlock(
             .padding(top = 52.dp)
             .fillMaxWidth()
             .height(300.dp)
-            .align(Alignment.TopCenter),
-        contentAlignment = Alignment.Center
+            .align(Alignment.TopCenter), contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator()
     }
@@ -280,7 +265,7 @@ fun TabBar(
             modifier = modifier
                 .padding(end = 32.dp)
                 .padding(top = 20.dp)
-                .size(24.dp)
+                .size(32.dp)
                 .align(Alignment.CenterEnd)
                 .clickable { navigateToWeatherList("Test") },
             painter = painterResource(id = R.drawable.list),
@@ -297,5 +282,28 @@ fun TabBar(
             tint = Color.Black
         )
     }
+}
+
+@Composable
+fun NoOnLocation(
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        modifier = modifier
+            .statusBarsPadding()
+            .padding(top = 52.dp)
+            .fillMaxWidth()
+            .height(300.dp),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = stringResource(id = R.string.no_location),
+            style = MaterialTheme.typography.titleLarge.copy(
+                fontWeight = FontWeight.SemiBold, color = Color.White
+            ),
+            textAlign = TextAlign.Center
+        )
+    }
+
 }
 

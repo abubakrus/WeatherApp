@@ -27,10 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.weatherapp.R
 import com.example.weatherapp.presentation.models.WeatherHourInfoUi
-import com.example.weatherapp.presentation.theme.LightBlue
 import com.example.weatherapp.presentation.theme.NightBlue
-import com.example.weatherapp.presentation.utils.DayType
-import com.example.weatherapp.presentation.utils.fetchDayType
 import java.util.Date
 
 @Preview
@@ -63,8 +60,7 @@ fun HourlyWeatherItemListPreview() {
 
 @Composable
 fun HourlyWeatherItemList(
-    weatherHours: List<WeatherHourInfoUi>,
-    modifier: Modifier = Modifier
+    weatherHours: List<WeatherHourInfoUi>, modifier: Modifier = Modifier
 ) {
 
     val filtredWeathers = mutableListOf<WeatherHourInfoUi>()
@@ -74,12 +70,10 @@ fun HourlyWeatherItemList(
     }.firstOrNull()
 
     filtredWeathers.addAll(weatherHours.filter { it.date.hours != Date().hours })
-    if (currentWeather != null) filtredWeathers.add(0,currentWeather)
+    if (currentWeather != null) filtredWeathers.add(0, currentWeather)
 
     Box(
-        modifier = modifier
-            .fillMaxWidth(),
-        contentAlignment = Alignment.Center
+        modifier = modifier.fillMaxWidth(), contentAlignment = Alignment.Center
     ) {
         Image(
             modifier = Modifier
@@ -108,8 +102,7 @@ fun HourlyWeatherItemList(
 
 @Composable
 fun HourlyWeatherItem(
-    weatherHourInfoUi: WeatherHourInfoUi,
-    modifier: Modifier = Modifier
+    weatherHourInfoUi: WeatherHourInfoUi, modifier: Modifier = Modifier
 ) {
     val isNow = weatherHourInfoUi.date.hours == Date().hours
     val actualColor = NightBlue

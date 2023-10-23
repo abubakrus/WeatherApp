@@ -1,10 +1,12 @@
 package com.example.weatherapp.presentation
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import com.example.weatherapp.presentation.navigation.AppNavGraph
 import com.example.weatherapp.presentation.theme.WeatherAppTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,6 +16,7 @@ private const val PERMISSIONS_ACTIVITY_KEY = "PERMISSIONS_ACTIVITY_KEY"
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

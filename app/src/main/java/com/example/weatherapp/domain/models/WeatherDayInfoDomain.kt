@@ -1,7 +1,6 @@
 package com.example.weatherapp.domain.models
 
 import java.util.Date
-import kotlin.reflect.KFunction1
 
 data class WeatherHourInfoDomain(
     val temperature: Double,

@@ -1,7 +1,6 @@
 package com.example.weatherapp.di
 
 import com.example.weatherapp.data.remote.WeatherServer
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,9 +14,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 @InstallIn(SingletonComponent::class)
 class RetrofitModule {
-        @Provides
-        fun provideRetrofit(): Retrofit {
-            return Retrofit.Builder()
+    @Provides
+    fun provideRetrofit(): Retrofit {
+        return Retrofit.Builder()
             .baseUrl("https://api.open-meteo.com")
             .addConverterFactory(GsonConverterFactory.create())
             .client(

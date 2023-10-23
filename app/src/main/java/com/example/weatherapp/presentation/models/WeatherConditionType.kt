@@ -111,6 +111,7 @@ enum class WeatherConditionType(
         lightImageID = R.drawable.rain_head_light,
         nightImageID = R.drawable.rain_head_light
     );
+
     companion object {
         fun findWeatherTypeByCode(weatherCode: Int): WeatherConditionType =
             values().find { weatherConditionType ->

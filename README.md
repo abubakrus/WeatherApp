@@ -35,4 +35,25 @@ server (https://open-meteo.com/en/docs#hourly=temperature_2m&daily=&timezone=GMT
   provides an abstraction layer over SQLite to allow for more robust database access while
   harnessing the full power of SQLite.
 
+* [Location](https://developer.android.com/training/location/retrieve-current)Get the last known
+  location
+  Using the Google Play services location APIs, your app can request the last known location of the
+  user's device.
+  In most cases, you are interested in the user's current location,
+  which is usually equivalent to the last known location of the device.
 
+* [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)Hilt is a
+  dependency injection library for Android that reduces the boilerplate of doing manual dependency
+  injection in your project. Doing manual dependency injection requires you to construct every class
+  and its dependencies by hand, and to use containers to reuse and manage dependencies.
+
+* [Retrofit](https://www.geeksforgeeks.org/retrofit-with-kotlin-coroutine-in-android/)Retrofit is a
+  type-safe http client which is used to retrieve, update and delete the data from web services.
+  Nowadays retrofit library is popular among the developers to use the API key. The Kotlin team
+  defines coroutines as “lightweight threads”. They are sort of tasks that the actual threads can
+  execute. Coroutines were added to Kotlin in version 1.3 and are based on established concepts from
+  other languages. Kotlin coroutines introduce a new style of concurrency that can be used on
+  Android to simplify async code. In this article, we will learn about retrofit using Kotlin
+  coroutine. So we will be using Retrofit for network requests. Retrofit is a very popular library
+  used for working APIs and very commonly used as well. We will learn it by making a simple app
+  using an API to get some data using Retrofit.
